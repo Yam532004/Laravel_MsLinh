@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Http\Controllers\ProductController;
@@ -24,3 +25,5 @@ Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/slides', [SlideController::class. 'index']);
 Route::get('/products/{id} ', [ProductController::class, 'show'])->name('product/detail');
+
+Route::get('/customer/register', [CustomerController::class, 'index']);
