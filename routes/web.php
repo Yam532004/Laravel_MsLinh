@@ -23,7 +23,10 @@ Route::get('/', function () {
 
 Route::get('/products', [ProductController::class, 'index']);
 
+Route::get('/home', [ProductController::class, 'home']);
+
 Route::get('/products/slides', [SlideController::class. 'index']);
-Route::get('/products/{id} ', [ProductController::class, 'show'])->name('product/detail');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('product/detail');
 
 Route::get('/customer/register', [CustomerController::class, 'index']);
+Route::get('/productType/{id}', [ProductController::class, 'getProductType'])->name('getProductType');

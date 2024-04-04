@@ -1,8 +1,10 @@
 <?php
+namespace App\Models;
 
-namespace App;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Cart
+class Cart extends Model
 {
 	public $items = null;
 	public $totalQty = 0;

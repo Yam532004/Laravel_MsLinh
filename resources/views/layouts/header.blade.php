@@ -1,20 +1,23 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>BetaDesign </title>
+	<title>Laravel </title>
 	<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/dest/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/dest/vendors/colorbox/example3/colorbox.css">
-	<link rel="stylesheet" title="style" href="assets/dest/css/style.css">
-	<link rel="stylesheet" href="assets/dest/css/animate.css">
-	<link rel="stylesheet" title="style" href="assets/dest/css/huong-style.css">
+	<link rel="stylesheet" href="source/assets/dest/css/font-awesome.min.css">
+	<link rel="stylesheet" href="source/assets/dest/vendors/colorbox/example3/colorbox.css">
+	<link rel="stylesheet" href="source/assets/dest/rs-plugin/css/settings.css">
+	<link rel="stylesheet" href="source/assets/dest/rs-plugin/css/responsive.css">
+	<link rel="stylesheet" title="style" href="source/assets/dest/css/style.css">
+	<link rel="stylesheet" href="source/assets/dest/css/animate.css">
+	<link rel="stylesheet" title="style" href="source/assets/dest/css/huong-style.css">
 </head>
+
 <body>
-	
 	<div id="header">
 		<div class="header-top">
 			<div class="container">
@@ -37,14 +40,14 @@
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">
-					<a href="index.html" id="logo"><img src="assets/dest/images/logo-cake.png" width="200px" alt=""></a>
+					<a href="index.html" id="logo"><img src="source/assets/dest/images/logo-cake.png" width="200px" alt=""></a>
 				</div>
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
 					<div class="beta-comp">
 						<form role="search" method="get" id="searchform" action="/">
-					        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
-					        <button class="fa fa-search" type="submit" id="searchsubmit"></button>
+							<input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+							<button class="fa fa-search" type="submit" id="searchsubmit"></button>
 						</form>
 					</div>
 
@@ -54,7 +57,7 @@
 							<div class="beta-dropdown cart-body">
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="assets/dest/images/products/cart/1.png" alt=""></a>
+										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/1.png" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">Sample Woman Top</span>
 											<span class="cart-item-options">Size: XS; Colar: Navy</span>
@@ -65,7 +68,7 @@
 
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="assets/dest/images/products/cart/2.png" alt=""></a>
+										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/2.png" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">Sample Woman Top</span>
 											<span class="cart-item-options">Size: XS; Colar: Navy</span>
@@ -76,7 +79,7 @@
 
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="assets/dest/images/products/cart/3.png" alt=""></a>
+										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/3.png" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">Sample Woman Top</span>
 											<span class="cart-item-options">Size: XS; Colar: Navy</span>
@@ -109,11 +112,13 @@
 					<ul class="l-inline ov">
 						<li><a href="index.html">Trang chủ</a></li>
 						<li><a href="#">Sản phẩm</a>
+							@if(isset($producttypes))
 							<ul class="sub-menu">
-								<li><a href="product_type.html">Sản phẩm 1</a></li>
-								<li><a href="product_type.html">Sản phẩm 2</a></li>
-								<li><a href="product_type.html">Sản phẩm 4</a></li>
+								@foreach($producttypes as $producttype)
+								<li><a href="{{ route('getProductType', ['id' => $producttype->id]) }}">{{ $producttype->name }}</a></li>
+								@endforeach
 							</ul>
+							@endif
 						</li>
 						<li><a href="about.html">Giới thiệu</a></li>
 						<li><a href="contacts.html">Liên hệ</a></li>
@@ -122,50 +127,4 @@
 				</nav>
 			</div> <!-- .container -->
 		</div> <!-- .header-bottom -->
-	</div> <!-- #header -->
-	<div class="inner-header">
-		<div class="container">
-			<div class="pull-left">
-				<h6 class="inner-title">Đăng nhập</h6>
-			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb">
-					<a href="index.html">Home</a> / <span>Đăng nhập</span>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
 	</div>
-	
-	<div class="container">
-		<div id="content">
-			
-			<form action="#" method="post" class="beta-form-checkout">
-				<div class="row">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-6">
-						<h4>Đăng nhập</h4>
-						<div class="space20">&nbsp;</div>
-
-						
-						<div class="form-block">
-							<label for="email">Email address*</label>
-							<input type="email" id="email" required>
-						</div>
-						<div class="form-block">
-							<label for="phone">Password*</label>
-							<input type="text" id="phone" required>
-						</div>
-						<div class="form-block">
-							<button type="submit" class="btn btn-primary">Login</button>
-						</div>
-					</div>
-					<div class="col-sm-3"></div>
-				</div>
-			</form>
-		</div> <!-- #content -->
-	</div> <!-- .container -->
-
-	
-</body>
-</html>

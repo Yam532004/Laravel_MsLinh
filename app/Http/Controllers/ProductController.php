@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,12 +12,16 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
 
+    public function home()
+    {
+        return view('home');
+    }
     public function index()
     {
         //
         $products = Product::where('new', 1)->get();
         $productAll = Product::all();
-        return view('product', ['products'=>$products, "productAll" =>$productAll] );
+        return view('product', ['products' => $products, "productAll" => $productAll]);
     }
 
     /**
@@ -24,7 +30,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-       
+
     }
 
     /**
@@ -71,5 +77,13 @@ class ProductController extends Controller
         //
     }
 
+    public function getProductType($id)
+    {
+        $producttype = ProductType::find($id);
+        $productByTypes = Product::all()
+            ->where('id_type', '=', $id);
+        return view('product-type', compact('productByTypes'));
+    }
 
+   
 }

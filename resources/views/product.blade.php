@@ -1,6 +1,6 @@
-@extends('layouts.index');
+@extends('layouts.layouts');
 
-@section('newProduct')
+@section('product')
 <div class="beta-products-list">
 	<h4>New Products</h4>
 	<div class="beta-products-details">
