@@ -6,8 +6,7 @@ use App\Models\Product;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use Illuminate\Support\Facades;
-use App\Http\Controllers\Session;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -88,14 +87,14 @@ class ProductController extends Controller
         return view('product-type', compact('productByTypes'));
     }
 
-    public function addToCart(Request $request, $id){
+    //thêm 1 sản phẩm có id cụ thể vào model cart rồi lưu dữ liệu của model cart vào 1 session có tên cart (session được truy cập bằng thực thể Request)
+    public function addToCart(Request $request, $id)
+    {
         $product = Product::find($id);
-        $oldCart = Session('cart')?Session::get('cart'):null;
+        $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
+        $cart->add($product, $id);
         $request->session()->put('cart', $cart);
-        return redirect()->route('homepage');
+        return redirect()->back();
     }
-
-   
 }

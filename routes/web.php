@@ -30,3 +30,4 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('product/
 
 Route::get('/customer/register', [CustomerController::class, 'index']);
 Route::get('/productType/{id}', [ProductController::class, 'getProductType'])->name('getProductType');
+Route::get('/add-to-cart/{id}',[ProductController::class,'addToCart'])->name('banhang.addtocart');
