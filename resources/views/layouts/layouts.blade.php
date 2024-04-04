@@ -14,7 +14,6 @@
 					<!-- .beta-products-list -->
 				</div>
 			</div> <!-- end section with sidebar and main content -->
-			@yield('home')
 
 		</div> <!-- .main-content -->
 	</div> <!-- #content -->

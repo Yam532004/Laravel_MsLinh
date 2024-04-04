@@ -1,5 +1,5 @@
 @extends('layouts.layouts');
-
+{{-- @extends('home'); --}}
 @section('product')
 <div class="beta-products-list">
 	<h4>New Products</h4>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
+use App\Models\Cart;
+use Illuminate\Support\Facades;
+use App\Http\Controllers\Session;
 
 class ProductController extends Controller
 {
@@ -83,6 +86,15 @@ class ProductController extends Controller
         $productByTypes = Product::all()
             ->where('id_type', '=', $id);
         return view('product-type', compact('productByTypes'));
+    }
+
+    public function addToCart(Request $request, $id){
+        $product = Product::find($id);
+        $oldCart = Session('cart')?Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        return redirect()->route('homepage');
     }
 
    
