@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
-use Illuminate\Support\Facades\Route;
-use App\Models\Product;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SlideController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,22 +12,29 @@ use App\Http\Controllers\SlideController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('detail');
 
-Route::get('/home', [ProductController::class, 'home']);
+Route::get('/pricing', [ProductController::class, 'showPricing'])->name('showPricing');
 
-Route::get('/products/slides', [SlideController::class. 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('product/detail');
+Route::get('/product-type/{id}', [ProductController::class, 'showProductType'])->name('showProductType');
 
-Route::get('/customer/register', [CustomerController::class, 'index']);
-Route::get('/productType/{id}', [ProductController::class, 'getProductType'])->name('getProductType');
-Route::get('/add-to-cart/{id}',[ProductController::class,'addToCart'])->name('banhang.addtocart');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/checkout', [HomeController::class, 'showCart'])->name('showCart');
+
+Route::get('/login', [UserController::class, 'login'])->name('login');
+
+
+Route::get('/sign-up', [UserController::class, 'signUp'])->name('sign-up');
+
+Route::get('/about-page', [HomeController::class, 'about'])->name('about-page');
+
+Route::get('/contact-page', [HomeController::class, 'contact'])->name('contact-page');
+
+Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add-to-cart');

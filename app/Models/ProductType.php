@@ -9,4 +9,7 @@ class ProductType extends Model
 {
     use HasFactory;
     protected $table = 'type_products';
+
+
+    
 }
