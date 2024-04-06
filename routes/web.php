@@ -37,4 +37,6 @@ Route::get('/about-page', [HomeController::class, 'about'])->name('about-page');
 
 Route::get('/contact-page', [HomeController::class, 'contact'])->name('contact-page');
 
-Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('/add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('addToCart');
+
+Route::get('/delete/{id}', [HomeController::class, 'delete'])->name('delete-cart-item');

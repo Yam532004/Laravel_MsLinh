@@ -13,13 +13,13 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('login');
+        return view('pages/login');
     }
 
     public function signUp()
     {
         $carts = Cart::all();
 
-        return view('sign-up',compact('carts')); 
+        return view('pages/sign-up',compact('carts')); 
     }
 }

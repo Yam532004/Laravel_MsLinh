@@ -47,6 +47,6 @@ class ProductController extends Controller
 
         $products = $this->products->getAllProductType($id);
         // dd($products);
-        return view('pages/product-type', compact('products'));
+        return view('pages/product_type', compact('products'));
     }
 }

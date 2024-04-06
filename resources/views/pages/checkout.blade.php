@@ -51,15 +51,20 @@
                             <div class="your-order-item">
                                 <div>
                                     <!--  one item	 -->
+                                    @foreach($products as $product)
                                     <div class="media">
-                                        <img width="25%" src="https://images.foody.vn/res/g116/1154374/prof/s640x400/foody-upload-api-foody-mobile-vu-be14b46e-221027152509.jpeg" alt="" class="pull-left">
+                                        <img width="25%" src="/source/image/product/{{ $product['item']['image'] }}" alt="" class="pull-left">
                                         <div class="media-body">
-                                            <p class="font-large">Men's Belt</p>
-                                            <span class="color-gray your-order-info">Color: Red</span>
-                                            <span class="color-gray your-order-info">Size: M</span>
-                                            <span class="color-gray your-order-info">Qty: 1</span>
+                                            <p class="font-large">{{ $product['item']['name'] }}</p>
+                                            <span class="cart-item-amount">{{ $product['qty'] }}*<span>
+                                                    @if($product['item']['promotion_price']==0)
+                                                    {{ number_format($product['item']['unit_price']) }}@else
+                                                    {{ number_format($product['item']['promotion_price']) }}
+                                                    @endif
+                                                </span></span>
                                         </div>
                                     </div>
+                                    @endforeach
                                     <!-- end one item -->
                                 </div>
                                 <div class="clearfix"></div>
@@ -69,7 +74,7 @@
                                     <p class="your-order-f18">Tổng tiền:</p>
                                 </div>
                                 <div class="pull-right">
-                                    <h5 class="color-black">$235.00</h5>
+                                    <h5 class="color-black">{{ $cart->totalPrice }}</h5>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
