@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('producttypes', $producttypes);
         });
         //chia sẻ biến Session('cart') cho các view header.blade.php và checkout.php
-        Facades\View::composer(['layout.header', 'pages.checkout'], function (View $view) {
+        Facades\View::composer(['layout.header', 'pages.checkout', 'pages.shopping-cart'], function (View $view) {
             if (Session('cart')) {
                 $oldCart = Session::get('cart'); //session cart được tạo trong method addToCart của PageController
                 $cart = new Cart();

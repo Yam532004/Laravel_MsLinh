@@ -40,3 +40,7 @@ Route::get('/contact-page', [HomeController::class, 'contact'])->name('contact-p
 Route::get('/add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('addToCart');
 
 Route::get('/delete/{id}', [HomeController::class, 'delete'])->name('delete-cart-item');
+
+Route::get('/checkout/payment', [CartController::class, 'checkout'])->name('checkout.VNP');
+
+Route::get('/shoping-cart', [CartController::class, 'cart'])->name('shopping-cart');

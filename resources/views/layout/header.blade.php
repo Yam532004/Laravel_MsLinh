@@ -65,6 +65,10 @@
                                     <div class="cart-caption">
                                         <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{ $cart->totalPrice }}</span></div>
                                         <div class="clearfix"></div>
+                                        <div class="center">
+                                            <div class="space10">&nbsp;</div>
+                                            <a href="{{ route('shopping-cart') }}" class="beta-btn primary text-center">Xem <i class="fa fa-chevron-right"></i></a>
+                                        </div>
 
                                         <div class="center">
                                             <div class="space10">&nbsp;</div>
