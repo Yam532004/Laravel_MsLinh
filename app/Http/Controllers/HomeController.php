@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Products;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
@@ -63,5 +66,103 @@ class HomeController extends Controller
         $products = $cart->getItems();
         // dd($products);
         return view('pages.checkout', ['products' => $products]);
+    }
+
+    public function updateSessionQuantity(Request $request)
+    {
+        $productId = $request->input('productId');
+        $newQuantity = $request->input('quantity');
+
+        // Tìm kiếm giá trị qty trong session
+        $product = $request->session()->get('product');
+
+        if ($product) {
+            $filteredProduct = $product->filter(function ($item) use ($productId) {
+                return $item['item']['id'] == $productId;
+            })->first();
+
+            if ($filteredProduct) {
+                // Tìm thấy đối tượng trong session, tiến hành cập nhật qty
+                $filteredProduct['qty'] = $newQuantity;
+                $request->session()->put('product', $product);
+                $request->session()->put('Qty', $newQuantity);
+            }
+        }
+
+        return view('pages.shopping-cart', compact('newQuantity', 'product'));
+    }
+    public function getSignin()
+    {
+        return view('dangky');
+    }
+    public function postSignup(Request $req)
+    {
+        $req->validate(
+
+            [
+
+                'email' => 'required|email|unique:users,email',
+                'full_name' => 'required',
+                'password' => 'required|min:6|max:20',
+                'address' => 'required',
+                'phone' => 'required',
+                'repassword' => 'required|same:password'
+            ],
+            [
+                'email.required' => 'Vui lòng nhập email',
+                'email.email' => 'Không đúng định dạng email',
+                'email.unique' => 'Email đã có người sử  dụng',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'repassword.same' => 'Mật khẩu không giống nhau',
+                'password.min' => 'Mật khẩu ít nhất 6 ký tự'
+            ]
+        );
+
+        $user = new User();
+        $user->full_name = $req->full_name;
+        $user->email = $req->email;
+        $user->password = Hash::make($req->password);
+        $user->phone = $req->phone;
+        $user->address = $req->address;
+        $user->save();
+        return redirect()->back()->with('success', 'Tạo tài khoản thành công');
+    }
+
+    public function getLogin()
+    {
+        return view('login');
+    }
+
+    public function postLogin(Request $req)
+    {
+        $this->validate(
+            $req,
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6|max:20'
+            ],
+            [
+                'email.required' => 'Vui lòng nhập email',
+                'email.email' => 'Không đúng định dạng email',
+                'email.unique' => 'Email đã có người sử  dụng',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu ít nhất 6 ký tự'
+            ]
+        );
+        $credentials = ['email' => $req->email, 'password' => $req->password];
+        if (Auth::attempt($credentials)) { //The attempt method will return true if authentication was successful. Otherwise, false will be returned.
+            return redirect('/')->with(['flag' => 'alert', 'success' => 'Đăng nhập thành công']);
+        } else {
+            return redirect()->back()->with(['flag' => 'danger', 'message' => 'Đăng nhập không thành công']);
+        }
+    }
+
+    public function getLogout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        // return 'Dang xuat thanh cong';
+        return redirect('/')->with(['flag' => 'alert', 'success' => 'Đăng xuất thành công']);
     }
 }

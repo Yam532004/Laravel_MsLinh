@@ -49,4 +49,9 @@ class ProductController extends Controller
         // dd($products);
         return view('pages/product_type', compact('products'));
     }
+
+    public function getCateList()
+    {
+        return 'hello';
+    }
 }

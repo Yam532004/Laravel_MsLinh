@@ -9,6 +9,16 @@
             <div class="space60">&nbsp;</div>
             <div class="row">
                 <div class="col-sm-12">
+                    @if (count($errors)>0)
+                    <div class="alert alert danger">
+                        @foreach($errors->all() as $err)
+                        {{ $err }}
+                        @endforeach
+                    </div>
+                    @endif
+                    @if(Session::has('success'))
+                    <div class="alert alert success">{{ Session::get('success') }} </div>
+                    @endif
                     <div class="beta-products-list">
                         <h4>New Products</h4>
                         <div class="beta-products-details">
