@@ -45,6 +45,7 @@ class HomeController extends Controller
         // dd($request);
         return redirect()->back();
     }
+
     public function contact()
     {
         return view('pages/contact');
@@ -70,29 +71,28 @@ class HomeController extends Controller
         return view('pages.checkout', ['products' => $products]);
     }
 
-    public function updateSessionQuantity(Request $request)
+    public function updateSessionQuantity(Request $request, $productId)
     {
-        $productId = $request->input('productId');
-        $newQuantity = $request->input('quantity');
+        $quantity = $request->input('quantity');
+        $cart = session()->get('cart');
 
-        // Tìm kiếm giá trị qty trong session
-        $product = $request->session()->get('product');
+        if (isset($cart->items[$productId])) {
 
-        if ($product) {
-            $filteredProduct = $product->filter(function ($item) use ($productId) {
-                return $item['item']['id'] == $productId;
-            })->first();
+            $item = $cart->items[$productId]['item'];
+            $oldPrice = $item['promotion_price'] == 0 ? $item['unit_price'] : $item['promotion_price'];
+            $oldTotalPrice = $oldPrice * $cart->items[$productId]['qty'];
+            $newTotalPrice = $oldPrice * $quantity;
 
-            if ($filteredProduct) {
-                // Tìm thấy đối tượng trong session, tiến hành cập nhật qty
-                $filteredProduct['qty'] = $newQuantity;
-                $request->session()->put('product', $product);
-                $request->session()->put('Qty', $newQuantity);
-            }
+            $cart->items[$productId]["item"]["qty"] = $quantity;
+            $cart->totalPrice = $cart->totalPrice - $oldTotalPrice + $newTotalPrice;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật');
         }
-
-        return view('pages.shopping-cart', compact('newQuantity', 'product'));
     }
+
+
     public function getSignin()
     {
         return view('dangky');
@@ -100,7 +100,6 @@ class HomeController extends Controller
     public function postSignup(Request $req)
     {
         $req->validate(
-
             [
 
                 'email' => 'required|email|unique:users,email',

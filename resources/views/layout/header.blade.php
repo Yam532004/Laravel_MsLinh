@@ -10,14 +10,14 @@
             <div class="pull-right auto-width-right">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       
-                            <i class="fa fa-user"></i>
-                            @if(Auth::check())
-                            {{ Auth::user()->email }}
-                            @else
-                            Tài khoản
-                            @endif
-                            <span class="caret"></span>
+
+                        <i class="fa fa-user"></i>
+                        @if(Auth::check())
+                        {{ Auth::user()->email }}
+                        @else
+                        Tài khoản
+                        @endif
+                        <span class="caret"></span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a href="{{ route('sendEmail')}}">Quên mật khẩu</a>
@@ -67,7 +67,7 @@
                                             <a class="pull-left" href="#"><img src="/source/image/product/{{ $product['item']['image'] }}" alt=""></a>
                                             <div class="media-body">
                                                 <span class="cart-item-title">{{ $product['item']['name'] }}</span>
-                                                <span class="cart-item-amount">{{ $product['qty'] }}*<span>
+                                                <span class="cart-item-amount">{{ $product['item']['qty'] }}*<span>
                                                         @if($product['item']['promotion_price']==0)
                                                         {{ number_format($product['item']['unit_price']) }}@else
                                                         {{ number_format($product['item']['promotion_price']) }}

@@ -167,18 +167,12 @@
                         </td>
 
                         <td class="product-quantity">
-
                             <form action="{{ route('updateSessionQuantity', ['id' => $product['item']['id']]) }}" method="POST">
                                 @csrf
-
                                 <input type="hidden" name="productId" value="{{ $product['item']['id'] }}">
-                                <button class="btn btn-success px-2 m-lg-2" data-product-id="{{ $product['item']['id'] }}" onclick="minusQuantity(this.dataset.productId)">
-                                    -
-                                </button>
-                                <input name="quantity" id="quantityInput" data-product-id="{{ $product['item']['id'] }}" data-csrf-token="{{ csrf_token() }}" type="number" class="form-control" style="width: 80px; height: 45px" placeholder="{{ $product['qty'] }}" @if(isset($newQuantity)) value="{{ $newQuantity }}" @else value="{{ $product['qty'] }}" @endif />
-                                <button class="btn btn-primary px-2 m-lg-2" data-product-id="{{ $product['item']['id'] }}" onclick="plusQuantity(this.dataset.productId)">
-                                    +
-                                </button>
+
+                                <input name="quantity" id="quantityInput" type="number" class="form-control" style="width: 80px; height: 45px" placeholder="{{ $product['item']['qty'] }}" />
+
                                 <button type="submit" class="btn btn-primary px-2 m-lg-2">
                                     Save
                                 </button>
@@ -190,15 +184,10 @@
 
                         <td class="product-subtotal">
                             <p class="amount">
-                            <p class="cart-item-amount">@if(isset($newQuantity))
-                                {{ $newQuantity}}*
-                                @else
-                                {{ $product['qty'] }}*
-                                @endif />
-                            <p>
+
                                 @if($product['item']['promotion_price']==0)
-                                {{ number_format($product['item']['unit_price']) }}@else
-                                {{ number_format($product['item']['promotion_price']) }}
+                                {{ number_format($product['item']['unit_price'] *$product['item']['qty']) }}@else
+                                {{ number_format($product['item']['promotion_price'] * $product['item']['qty']) }}
                                 @endif
                             </p>
                             </p>
@@ -572,52 +561,5 @@
             }
         });
     });
-
-
-
-
-    function minusQuantity(productId) {
-        // var quantityInput = document.querySelector('input[data-product-id="' + productId + '"]');
-        var quantityInput = document.querySelector('input[data-product-id="' + productId + '"]');
-
-        var currentQuantity = parseInt(quantityInput.value);
-        if (currentQuantity > 0) {
-            var newQuantity = currentQuantity - 1;
-            quantityInput.value = newQuantity;
-            // updateSessionQuantity(productId, newQuantity);
-        }
-    }
-
-    function plusQuantity(productId) {
-        var quantityInput = document.querySelector('input[data-product-id="' + productId + '"]');
-        var currentQuantity = parseInt(quantityInput.value);
-        var newQuantity = currentQuantity + 1;
-        quantityInput.value = newQuantity;
-        // updateSessionQuantity(productId, newQuantity);
-    }
-
-    
-
-    function updateSessionQuantity(productId, quantity) {
-        var csrfToken = document.querySelector('input[data-product-id="' + productId + '"]').getAttribute('data-csrf-token');
-        fetch('http://127.0.0.1:8000/update-session-quantity', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': csrfToken
-                },
-                body: JSON.stringify({
-                    quantity: quantity
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Xử lý phản hồi từ server nếu cần
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Lỗi fetch: ', error);
-            });
-    }
 </script>
 @endsection
