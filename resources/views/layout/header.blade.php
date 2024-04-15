@@ -8,13 +8,28 @@
                 </ul>
             </div>
             <div class="pull-right auto-width-right">
-                <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="{{ route('getsignin')}}">Đăng kí</a></li>
-                    <li><a href="{{ route('getlogin')}}">Đăng nhập</a></li>
-                    <li><a href="{{ route('getlogout')}}">Đăng xuất</a></li>
-                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       
+                            <i class="fa fa-user"></i>
+                            @if(Auth::check())
+                            {{ Auth::user()->email }}
+                            @else
+                            Tài khoản
+                            @endif
+                            <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="{{ route('sendEmail')}}">Quên mật khẩu</a>
+                        @if(!Auth::check())
+                        <a href="{{ route('getsignin')}}">Đăng kí</a>
+                        <a href="{{ route('getlogin')}}">Đăng nhập</a>
+                        @endif
+                        <a href="{{ route('getlogout')}}">Đăng xuất</a>
+                    </div>
+                </div>
             </div>
+
             <div class="clearfix"></div>
         </div> <!-- .container -->
     </div> <!-- .header-top -->
@@ -102,7 +117,7 @@
                             @endif
                         </ul>
                     </li>
-                   
+
                     <li><a href="{{ route('about-page') }}">Giới thiệu</a></li>
                     <li><a href="{{ route('contact-page') }}">Liên hệ</a></li>
                 </ul>

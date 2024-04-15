@@ -76,3 +76,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
         Route::post('sua/{id}', [ProductController::class, 'postCateEdit'])->name('admin.postCateEdit');
     });
 });
+
+Route::get('/send-email', [HomeController::class, 'sendEmail'])->name('sendEmail');
+Route::post('/input-email', [HomeController::class, 'postInputEmail'])->name('postInputEmail');

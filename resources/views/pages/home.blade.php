@@ -1,6 +1,10 @@
 @extends('layout.master')
 @section('main_content')
-
+@if(Session::has('message'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('message') }}
+    </div>
+@endif
 
 <div class="rev-slider">
     <div class="fullwidthbanner-container">

@@ -27,9 +27,8 @@ class AdminLoginMiddleware
         }
         // return $next($request);
     }
-
-    
-
-
-
-}
+    protected $routeMiddleware = [
+        //cái có sẵn để y, thêm vào:
+         'adminLogin'=>'\App\Http\Middleware\AdminLoginMiddleware::class'
+     ];
+ }

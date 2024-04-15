@@ -596,28 +596,7 @@
         // updateSessionQuantity(productId, newQuantity);
     }
 
-    // function updateSessionQuantity(productId, quantity) {
-    //     // var csrfToken = document.querySelector('input[data-product-id="' + productId + '"]').getAttribute('data-csrf-token');
-    //     var csrfToken = 'eyJpdiI6IjNhVVZ3ZU15MVk4Rk1TWXhJRE91a3c9PSIsInZhbHVlIjoic1IvWEZ1ME5FMmZmcXZQK09LM0FzczQ2YUlXYXhjOU94YTFnT2FrbmRjMkVQUjJ3T2czM0VOZkFiWnUwN0dxK1N1dHJyMXpqU3llbjREeGx2RXVkM1YyQjV0TEVWQXpzYzlrWFZIbTY4aDZva0dZVUpUQ0NnaXFDMFhIMFdGazgiLCJtYWMiOiJmYmM1YTFkZjNmN2FlYzQxMDE0OTQ1OWFkZjA3MmFmYTAzZmVmZWVhYWUxZWZjNGNlMjVjOWY1MTRhMzgzZTc1IiwidGFnIjoiIn0%3D';
-    //     fetch('http://127.0.0.1:8000/update-session-quantity', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'X-CSRF-Token': csrfToken // Sử dụng CSRF token trong headers của yêu cầu
-    //             },
-    //             body: JSON.stringify({
-    //                 quantity: quantity
-    //             }),
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             // Xử lý phản hồi từ server nếu cần
-    //             console.log(csrfToken);
-    //         })
-    //         .catch(error => {
-    //             console.error('Lỗi fetch nè :', error);
-    //         });
-    // }
+    
 
     function updateSessionQuantity(productId, quantity) {
         var csrfToken = document.querySelector('input[data-product-id="' + productId + '"]').getAttribute('data-csrf-token');
