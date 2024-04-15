@@ -56,12 +56,12 @@
                                         <img width="25%" src="/source/image/product/{{ $product['item']['image'] }}" alt="" class="pull-left">
                                         <div class="media-body">
                                             <p class="font-large">{{ $product['item']['name'] }}</p>
-                                            <span class="cart-item-amount">{{ $product['qty'] }}*<span>
-                                                    @if($product['item']['promotion_price']==0)
-                                                    {{ number_format($product['item']['unit_price']) }}@else
-                                                    {{ number_format($product['item']['promotion_price']) }}
-                                                    @endif
-                                                </span></span>
+                                            <span class="cart-item-amount">{{ $product['item']['qty'] ?? 1 }}*</span>
+                                            @if($product['item']['promotion_price']==0)
+                                            {{ number_format($product['item']['unit_price']) }}@else
+                                            {{ number_format($product['item']['promotion_price']) }}
+                                            @endif
+                                            </span></span>
                                         </div>
                                     </div>
                                     @endforeach

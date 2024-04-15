@@ -171,7 +171,7 @@
                                 @csrf
                                 <input type="hidden" name="productId" value="{{ $product['item']['id'] }}">
 
-                                <input name="quantity" id="quantityInput" type="number" class="form-control" style="width: 80px; height: 45px" placeholder="{{ $product['item']['qty'] }}" />
+                                <input name="quantity" id="quantityInput" type="number" class="form-control" style="width: 80px; height: 45px" value="{{ old('qty', $product['item']['qty'] ?? 1) }}" placeholder="{{ $product['item']['qty'] ?? 1 }}" />
 
                                 <button type="submit" class="btn btn-primary px-2 m-lg-2">
                                     Save
@@ -184,10 +184,9 @@
 
                         <td class="product-subtotal">
                             <p class="amount">
-
                                 @if($product['item']['promotion_price']==0)
-                                {{ number_format($product['item']['unit_price'] *$product['item']['qty']) }}@else
-                                {{ number_format($product['item']['promotion_price'] * $product['item']['qty']) }}
+                                {{ number_format($product['item']['unit_price'] * $product['item']['qty'] ?? 1) }}@else
+                                {{ number_format($product['item']['promotion_price'] * $product['item']['qty'] ?? 1) }}
                                 @endif
                             </p>
                             </p>
