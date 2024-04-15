@@ -3,8 +3,8 @@
 @section('content');
 <div class="container">
     <div id="content">
-
-        <form action="#" method="post" class="beta-form-checkout">
+        <form action="{{ route('checkout.VNP') }}" method="POST" class="beta-form-checkout">
+            @csrf
             <div class="row">
                 <div class="col-sm-6">
                     <h4>Đặt hàng</h4>
@@ -12,7 +12,7 @@
 
                     <div class="form-block">
                         <label for="name">Họ tên*</label>
-                        <input type="text" id="name" placeholder="Họ tên" required>
+                        <input name="user_name" type="text" id="name" placeholder="Họ tên" required>
                     </div>
                     <div class="form-block">
                         <label>Giới tính </label>
@@ -23,18 +23,18 @@
 
                     <div class="form-block">
                         <label for="email">Email*</label>
-                        <input type="email" id="email" required placeholder="expample@gmail.com">
+                        <input type="email" id="email" name="email" required placeholder="expample@gmail.com">
                     </div>
 
                     <div class="form-block">
                         <label for="adress">Địa chỉ*</label>
-                        <input type="text" id="adress" placeholder="Street Address" required>
+                        <input name="address" type="text" id="adress" placeholder="Street Address" required>
                     </div>
 
 
                     <div class="form-block">
                         <label for="phone">Điện thoại*</label>
-                        <input type="text" id="phone" required>
+                        <input type="text" id="phone" required name="phone">
                     </div>
 
                     <div class="form-block">

@@ -41,7 +41,7 @@ Route::get('/add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add
 
 Route::get('/delete/{id}', [HomeController::class, 'delete'])->name('delete-cart-item');
 
-Route::get('/checkout/payment', [CartController::class, 'checkout'])->name('checkout.VNP');
+Route::post('/checkout/payment', [CartController::class, 'checkout'])->name('checkout.VNP');
 
 Route::get('/shoping-cart', [CartController::class, 'cart'])->name('shopping-cart');
 
